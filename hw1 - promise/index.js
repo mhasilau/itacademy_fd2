@@ -10,7 +10,7 @@ const evenNeven = (ms) => new Promise ( (resolve, reject) => {
 })
 
 evenNeven(2000)
-    .then( res => console.log('Number is:', res))
+    .then( res => console.log('Even number is:', res))
     .catch( err => (alert(`Number is odd - ${err}`)));
 
 
