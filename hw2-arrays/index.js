@@ -48,15 +48,30 @@
 
 //task 4-------------------------------------------------
 const userArr = prompt('enter some string').split('');
-const removeDuplicates = userArr.reduce( (acc, el) => acc.includes(el) ? acc : [...acc, el], []); 
-let counter = 0;
-const countIdentic = arr => {
-    return arr.forEach( el => {
-        console.log(`${el} is ${userArr.filter(item => item === el).length}`);
-    });
-};
-countIdentic(removeDuplicates);
+// const removeDuplicates = userArr.reduce( (acc, el) => acc.includes(el) ? acc : [...acc, el], []); 
+// let counter = 0;
+// const countIdentic = arr => {
+//     return arr.forEach( el => {
+//         console.log(`${el} is ${userArr.filter(item => item === el).length}`);
+//     });
+// };
+// countIdentic(removeDuplicates);
 
+
+const sortuserArr = userArr.sort();
+let i = 0;
+const obj = {};
+sortuserArr.forEach( el, i => {
+    if (i === i + 1) {
+        i++
+    } else if (i !== i + 1 || i + 1 === null) {
+        obj = {
+            el: i
+        }
+        i = 0;
+    }
+})
+console.log(obj);
 
 
 
