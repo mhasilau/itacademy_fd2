@@ -17,9 +17,6 @@ class Human {
 
 }
 
-
-
-
 class Worker extends Human {
 
     #rate = 15;
