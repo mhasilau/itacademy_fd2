@@ -45,7 +45,7 @@ class Worker extends Human {
 
 }
 
-class Developer extends Worker {
+class Developer extends Human {
     constructor (name, surname, company, position) {
         super(name, surname),
         this.company = company,
