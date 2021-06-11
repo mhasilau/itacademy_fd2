@@ -1,0 +1,31 @@
+@import './colors.scss';
+@import './classes.scss';
+
+.main-content {
+    padding: 30px;
+    background-color: $bkgColor;
+    height: 93vh;
+
+    &__post-form {
+        width: 50%;
+        margin: 10px auto;
+        @extend %borderBlock;
+        padding: 10px;
+        background-color: white;
+    }
+
+    &__posts {
+        width: 90%;
+        @extend %borderBlock;
+        margin: 20px auto;
+        min-height: 20px;
+
+        &__post {
+            background-color: $noBkgColor;
+            @extend %borderBlock;
+            width: 70%;
+            min-height: 20px;
+            margin: 20px 10px;
+        }
+    }
+}

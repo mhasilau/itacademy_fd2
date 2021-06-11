@@ -1,0 +1,13 @@
+@import './colors.scss';
+
+.header {
+    height: 7vh;
+    background-color: $primary;
+    display: flex;
+    align-items: center;
+
+    h1 {
+        color: $noBkgColor;
+        margin-left: 20px;
+    }
+}
