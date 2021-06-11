@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { initAPI, setLessons } from './api/api-handlers';
+import { initAPI, setLessons, getLessons } from './api/api-handlers';
 
 initAPI();
 
@@ -17,14 +17,18 @@ const user = {
 
 window.onload = () => {
     if (window.location.pathname === '/') {
-        const mainDiv = document.getElementById('main');
         const task1 = document.createElement('button');
+        task1.innerHTML = 'To task 1'
+        document.body.append(task1);
+        task1.onclick = () => window.location.href = '/task1.html';
+
         const task2 = document.createElement('button');
-        task1.innerHTML = 'hello';
-        task1.append(mainDiv);
+        task2.innerHTML = 'To task 2'
+        document.body.append(task2);
+        task2.onclick = () => window.location.href = '/task2.html';
     }
 
-    if (window.location.pathname === 'task1.html') {
+    if (window.location.pathname === '/task1.html') {
         const userName = ({ firstname, lastname }) => {
             return `${firstname} ${lastname}`
         }
@@ -38,15 +42,39 @@ window.onload = () => {
         
         const work = document.getElementById('work');
         work.innerHTML = userWork(user.job);
+
+        const goHome1 = document.createElement('button');
+        goHome1.innerHTML = 'To homepage'
+        document.body.append(goHome1);
+        goHome1.onclick = () => window.location.href = '/';
     }
 
-    if (window.location.pathname === 'task2.html') {
+    if (window.location.pathname === '/task2.html') {
+
+
         const lesson = {
-            number: '5',
-            date: moment().format('LLL'),
-            theme: 'async, firebase'
+            number: '4',
+            theme: 'async',
+            date: moment().format('LLL')
         }
 
-        setLessons(lesson);
+        const setButton = document.createElement('button');
+        setButton.innerHTML = 'Set';
+        document.body.append(setButton);
+        setButton.onclick = () => {
+            setLessons(lesson);
+        }
+        
+        const getButton = document.createElement('button');
+        getButton.innerHTML = 'Get';
+        document.body.append(getButton);
+        getButton.onclick = () => {
+            getLessons(lesson)
+        }
+
+        const goHome2 = document.createElement('button');
+        goHome2.innerHTML = 'To homepage'
+        document.body.append(goHome2);
+        goHome2.onclick = () => window.location.href = '/';
     }
 }
