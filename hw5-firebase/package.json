@@ -1,0 +1,26 @@
+{
+  "name": "hw5-firebase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --mode development --open"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "css-loader": "^5.2.6",
+    "firebase": "^8.6.7",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "moment": "^2.29.1",
+    "node-sass": "^6.0.0",
+    "sass-loader": "^12.1.0",
+    "scss-loader": "0.0.1",
+    "style-loader": "^2.0.0",
+    "uuid": "^8.3.2",
+    "webpack": "^5.39.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
