@@ -55,7 +55,7 @@ export const getUsers = () => {
                 
         const usrs = transformedUsersArray.map( ({ firstname, lastname, email, phone, userTime }) => {
             
-            const divContent = document.getElementsByClassName('content');
+            const divContent = document.getElementById('content');
             const divUser = document.createElement('div');
             divUser.className = 'form';
             let pName = document.createElement('p');
@@ -64,15 +64,26 @@ export const getUsers = () => {
             let pPhone = document.createElement('p');
             let pTime = document.createElement('p');
             const delBtn = document.createElement('button');
+            delBtn.innerHTML = 'Delete';
             delBtn.className = 'btn btn-info';
-             pName = firstname;
-            //  divUser.append(divContent);
-            //  pName.append(divUser);
-             pSName = lastname;
-             pEmail = email;
-             pPhone = phone;
-             pTime = userTime;
-             console.log(pName, pSName, pEmail, pPhone, pTime);
+            pName.innerHTML = firstname;
+            pSName.innerHTML = lastname;
+            pEmail.innerHTML = email;
+            pPhone.innerHTML = phone;
+            pTime.innerHTML = userTime;
+            divUser.append(pName);
+            divUser.append(pSName);
+            divUser.append(pEmail);
+            divUser.append(pPhone);
+            divUser.append(pTime);
+            divUser.append(delBtn);
+            divContent.append(divUser);
+
+            delBtn.onclick = () => {
+                usrs.forEach( () => {
+                    divUser.remove();
+                })
+            }
         });
     });
 }
