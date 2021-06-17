@@ -35,6 +35,8 @@ export const createUser = ({
 }
 
 export const getUsers = () => {
+    const divContent = document.getElementById('content');
+    divContent.innerHTML = null;
     fetch(`${databaseURL}/hw5.json`,
     {
         method: 'GET',
@@ -66,11 +68,11 @@ export const getUsers = () => {
             const delBtn = document.createElement('button');
             delBtn.innerHTML = 'Delete';
             delBtn.className = 'btn btn-info';
-            pName.innerHTML = firstname;
-            pSName.innerHTML = lastname;
-            pEmail.innerHTML = email;
-            pPhone.innerHTML = phone;
-            pTime.innerHTML = userTime;
+            pName.innerHTML = `Name: ${firstname}`;
+            pSName.innerHTML = `Second name: ${lastname}`;
+            pEmail.innerHTML = `E-mail: ${email}`;
+            pPhone.innerHTML = `Phone number: ${phone}`;
+            pTime.innerHTML = `Date of commit: ${userTime}`;
             divUser.append(pName);
             divUser.append(pSName);
             divUser.append(pEmail);
