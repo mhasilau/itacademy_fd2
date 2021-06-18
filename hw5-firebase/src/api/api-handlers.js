@@ -34,6 +34,24 @@ export const createUser = ({
         .then( result => console.log(result));
 }
 
+export const removeUser = (userID) => {
+    fetch(`${databaseURL}/hw5.${userID}.json`,
+    {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    )
+    .then( response => response.json())
+    .then( result => console.log(result));
+}
+
+
+
+
+
 export const getUsers = () => {
     const divContent = document.getElementById('content');
     divContent.innerHTML = null;
@@ -52,14 +70,12 @@ export const getUsers = () => {
                 id: key
             })
         );
-        // return transformedUsersArray;
-        // console.log(transformedUsersArray.length);
                 
-        const usrs = transformedUsersArray.map( ({ firstname, lastname, email, phone, userTime }) => {
-            
+        const usrs = transformedUsersArray.map( ({ userId, firstname, lastname, email, phone, userTime }) => {
             const divContent = document.getElementById('content');
             const divUser = document.createElement('div');
             divUser.className = 'form';
+            let uid = name;
             let pName = document.createElement('p');
             let pSName = document.createElement('p');
             let pEmail = document.createElement('p');
@@ -83,8 +99,10 @@ export const getUsers = () => {
 
             delBtn.onclick = () => {
                 usrs.forEach( () => {
+                    // removeUser(userId);
                     divUser.remove();
                 })
+                console.log(userTime);
             }
         });
     });
