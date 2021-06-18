@@ -1,5 +1,16 @@
-import { initApi, createUser, getUsers, createTodos, getTodos, updateUser, removeUser, createPost} from './api/api-handlers';
+import { initApi, 
+    createUser, 
+    getUsers, 
+    createTodos, 
+    getTodos, 
+    updateUser, 
+    removeUser, 
+    createPost,
+    getPosts
+} from './api/api-handlers';
+import {renderPosts} from './dom-handlers/posts-renderer';
 import moment from 'moment';
+import { routes, paths } from './shared/constants/routes';
 import { v4 as uuidv4 } from 'uuid';
 import './styles/styles.scss';
 
@@ -49,10 +60,31 @@ const post = {
 
 post_form.addEventListener('submit', event => {
     event.preventDefault();
-    post_content.value = null;
-    title_input.value = null;
     post.title = title_input.value;
     post.content = post_content.value;
-    createPost(post);
+    createPost(post)
+        .then( () => renderPosts());
+    post_content.value = null;
+    title_input.value = null;
 });
 
+// getPosts();
+renderPosts();
+
+
+window.onload = () => {
+    // if (window.location.pathname === '/') {
+    //     window.location.href = 'sign-in.html';
+    // }
+
+    const pathname = Object.values(paths).find( path => path === window.location.pathname);
+
+    switch (pathname) {
+        case paths.home:
+            window.location.href = routes.sign_in;
+            break;
+    
+        default:
+            break;
+    }
+}

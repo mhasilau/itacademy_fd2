@@ -128,7 +128,7 @@ const headers = {
 
 export const createPost = post => {
     const { userId, name, email, date, title, content } = post;
-    fetch(`${databaseURL}/posts.json`,
+    return fetch(`${databaseURL}/posts.json`,
     {
         method: 'POST',
         headers,
@@ -140,15 +140,17 @@ export const createPost = post => {
             title,
             content
         })
-    })
-    .then( response => response.json()
-    .then( result => result))
+    });
 }
 
 export const getPosts = () => {
-    fetch(`${databaseURL}/posts.json`,
-    {
-        method: 'GET',
-        headers
-    })
+    return fetch(`${databaseURL}/posts.json`, { headers })
+    .then( response => response.json())
+    .then( result => {
+        const transormedPostsArray = Object.keys(result).map( key => ({
+            ...result[key],
+            id: key
+        }));
+        return transormedPostsArray;
+    });
 }

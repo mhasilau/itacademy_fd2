@@ -4,7 +4,6 @@
 .main-content {
     padding: 30px;
     background-color: $bkgColor;
-    height: 93vh;
 
     &__post-form {
         width: 50%;
@@ -23,9 +22,24 @@
         &__post {
             background-color: $noBkgColor;
             @extend %borderBlock;
-            width: 70%;
+            width: 95%;
             min-height: 20px;
-            margin: 20px 10px;
+            margin: 20px auto;
+            padding: 15px;
+
+            &__title {
+                text-decoration: underline;
+            }
+
+            &__content {
+                padding: 10px;
+                // overflow: scroll;
+                border: 1px solid black;
+            }
+
+            &__info {
+                font-size: smaller;
+            }
         }
     }
 }
