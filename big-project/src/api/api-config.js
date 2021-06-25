@@ -11,6 +11,7 @@ export const FIREBASE_CONFIG = {
 export const databaseURL = 
     'https://fd2-async-default-rtdb.firebaseio.com';
 
+export const authURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_CONFIG.apiKey}`;
 
 
 

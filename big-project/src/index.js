@@ -8,13 +8,17 @@ import { initApi,
     createPost,
     getPosts
 } from './api/api-handlers';
-import {renderPosts} from './dom-handlers/posts-renderer';
-import moment from 'moment';
+import {renderPosts, postFormrender} from './dom-handlers/posts-renderer';
+
 import { routes, paths } from './shared/constants/routes';
-import { v4 as uuidv4 } from 'uuid';
+import { signInhandler } from './components/sign-in/sign-in';
+import { getToken } from './shared/ls-service';
+import { logoutBtnHandler } from './components/profile/profile';
+import { signUpHandler } from './components/sign-up/sign-up';
+
 import './styles/styles.scss';
 
-initApi();
+
 
 // const user = {
 //     username: 'jane',
@@ -41,35 +45,13 @@ initApi();
 
 
 
-const post_form = document.getElementById('post_form');
-const title_input = document.getElementById('title_input');
-const post_content = document.getElementById('post_content');
-const postContainer = document.querySelector('.main-content__posts');
-let counter = 0;
-
-const post = {
-    userId: uuidv4(),
-    name: 'mike',
-    email: 'pro100mishok@mail.ru',
-    date: moment().format('LLL'),
-    title: null,
-    content: null
-}
 
 
 
-post_form.addEventListener('submit', event => {
-    event.preventDefault();
-    post.title = title_input.value;
-    post.content = post_content.value;
-    createPost(post)
-        .then( () => renderPosts());
-    post_content.value = null;
-    title_input.value = null;
-});
+
 
 // getPosts();
-renderPosts();
+// renderPosts();
 
 
 window.onload = () => {
@@ -81,9 +63,24 @@ window.onload = () => {
 
     switch (pathname) {
         case paths.home:
-            window.location.href = routes.sign_in;
+
+            const token = getToken();
+            if (!token) {
+                window.location.href = routes.sign_in;
+            } else {
+                renderPosts();
+                postFormrender();
+                logoutBtnHandler();
+            }
+
+            
             break;
-    
+        case paths.sign_in:
+            signInhandler();
+            break;
+        case paths.sign_up:
+            signUpHandler();
+            break;
         default:
             break;
     }

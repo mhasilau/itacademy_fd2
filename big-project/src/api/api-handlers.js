@@ -1,13 +1,68 @@
+require('firebase/auth');
+
 import firebase from 'firebase/app';
-import { FIREBASE_CONFIG, databaseURL } from './api-config';
+import axios from 'axios';
+
+import { FIREBASE_CONFIG, databaseURL, authURL } from './api-config';
+
 
 export const initApi = () => {
     firebase.initializeApp(FIREBASE_CONFIG);
 }
 
-const headers = {
-                'Content-Type': 'application/json'
+export const createPost = post => {
+    const { userId, name, email, date, title, content } = post;
+    return fetch(`${databaseURL}/posts.json`,
+    {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            userId,
+            name,
+            email,
+            date,
+            title,
+            content
+        })
+    });
 }
+
+export const getPosts = () => {
+    return fetch(`${databaseURL}/posts.json`, { headers })
+    .then( response => response.json())
+    .then( result => {
+        const transormedPostsArray = Object.keys(result).map( key => ({
+            ...result[key],
+            id: key
+        }));
+        return transormedPostsArray;
+    });
+}
+const headers = {
+    'Content-Type': 'application/json'
+}
+
+export const signIn = (email, password) => {
+    return axios.post(authURL, {
+        email,
+        password,
+        returnSecureToken: true
+    })
+        .then( response => response)
+        .catch( error => console.log(error));
+}
+
+export const signUp = async (email, password) => {
+
+    return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(response => response);
+}
+
+
+initApi();
+
 
 // export const createUser = ({ username, age, createionDate }) => {
 //     fetch(
@@ -125,32 +180,3 @@ const headers = {
 
 
 
-
-export const createPost = post => {
-    const { userId, name, email, date, title, content } = post;
-    return fetch(`${databaseURL}/posts.json`,
-    {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-            userId,
-            name,
-            email,
-            date,
-            title,
-            content
-        })
-    });
-}
-
-export const getPosts = () => {
-    return fetch(`${databaseURL}/posts.json`, { headers })
-    .then( response => response.json())
-    .then( result => {
-        const transormedPostsArray = Object.keys(result).map( key => ({
-            ...result[key],
-            id: key
-        }));
-        return transormedPostsArray;
-    });
-}

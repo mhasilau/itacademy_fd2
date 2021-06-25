@@ -13,6 +13,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "css-loader": "^5.2.6",
     "firebase": "^8.6.5",
     "html-loader": "^2.1.2",
