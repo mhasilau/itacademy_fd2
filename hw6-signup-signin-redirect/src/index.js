@@ -1,5 +1,6 @@
 import { routes, paths } from './shared/constants/routes';
 import { signInHandler } from './components/sign-in/sign-in';
+import { signUpHandler } from './components/sign-up/sign-up';
 import { getToken } from './ls-config/ls-handler';
 
 import './styles/style.scss';
@@ -17,6 +18,10 @@ window.onload = () => {
             break;
         case paths.sign_in:
             signInHandler();
+            break;
+        case paths.sign_up:
+            signUpHandler();
+            break;
         default:
             break;
     }
