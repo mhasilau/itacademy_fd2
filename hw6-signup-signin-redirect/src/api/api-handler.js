@@ -20,4 +20,11 @@ export const signIn = (email, password) => {
         .catch( error => console.log(error));
 }
 
+export const signUp = async (email, password) => {
+    return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then( response => response)
+}
+
 initApi();
