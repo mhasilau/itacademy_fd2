@@ -15,6 +15,7 @@ window.onload = () => {
             if (!token) {
                 window.location.href = routes.sign_in;
             }
+            
             break;
         case paths.sign_in:
             signInHandler();

@@ -5,7 +5,6 @@ import axios from 'axios';
 
 import { FIREBASE_CONFIG, databaseURL, authURL } from './api-config';
 
-
 export const initApi = () => {
     firebase.initializeApp(FIREBASE_CONFIG);
 }
