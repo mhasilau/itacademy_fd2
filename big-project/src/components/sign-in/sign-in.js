@@ -3,8 +3,13 @@ import firebase from "firebase/app";
 import { signIn } from '../../api/api-handlers';
 import { getToken, setToken, removeToken} from '../../shared/ls-service';
 import { routes, paths } from '../../shared/constants/routes';
-import { passwordLengthValidator } from '../../shared/validators';
-import { showFormErrorMessage, hideFormErrorMessage } from '../../shared/error-handlers';
+import { passwordLengthValidator, emailValidator } from '../../shared/validators';
+import { 
+    showPasswordLengthErrorMessage,
+    hidePasswordLengthErrorMessage,
+    hideEmailErrorMessage,
+    showEmailErrorMessage
+} from '../../shared/error-handlers';
 
 export const signInhandler = () => {
     const signInForm = document.querySelector('.sign_in__form');
@@ -17,7 +22,7 @@ export const signInhandler = () => {
 
     const formFields = {
         email: {
-            isValid: true
+            isValid: false
         },
         password: {
             isValid: false
@@ -40,15 +45,34 @@ export const signInhandler = () => {
     passwordInput.oninput = () => {
         if (passwordLengthValidator(passwordInput.value)) {
             formFields.password.isValid = true;
-            hideFormErrorMessage();
+            hidePasswordLengthErrorMessage();
+            passwordInput.classList.remove('invalid');
         } else {
             formFields.password.isValid = false;
-            showFormErrorMessage();
+            passwordInput.classList.add('invalid');
         }
         checkFormValid();
     }
 
-    passwordInput.onblur = () => passwordLengthValidator(passwordInput.value) ? showFormErrorMessage() : hideFormErrorMessage();
+    emailInput.oninput = () => {
+        if (emailValidator(emailInput.value)) {
+            formFields.email.isValid = true;
+            hidePasswordLengthErrorMessage();
+            emailInput.classList.remove('invalid');
+        } else {
+            formFields.email.isValid = false;
+            emailInput.classList.add('invalid');
+        }
+        checkFormValid();
+    }
+
+    passwordInput.onblur = () => !passwordLengthValidator(passwordInput.value) ?
+        showPasswordLengthErrorMessage() :
+        hidePasswordLengthErrorMessage();
+
+    emailInput.onblur = () => !passwordLengthValidator(emailInput.value) ?
+        showEmailErrorMessage() :
+        hideEmailErrorMessage();
 
     const checkFormValid = () => {
         const isFormValid = Object.values(formFields).every(value => value.isValid);
