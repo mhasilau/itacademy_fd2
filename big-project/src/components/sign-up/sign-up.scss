@@ -1,3 +1,6 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
 .sign_up {
     display: flex;
     flex-direction: column;
@@ -6,5 +9,65 @@
     &__form {
         width: 80%;
         margin-top: 50px;
+
+        &__password-strength {
+            height: 130px;
+            border: 1px solid #0d6efd;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            margin-top: -50px;
+            padding: 10px;
+            background-color: #d6caba;
+            color: #0d6efd;
+
+            &-status {
+                height: 10px;
+                border: 1px solid;
+                border-radius: $border-radius;
+                margin-top: -15px;
+
+                &-filler {
+                    height: 8px;
+                    border-radius: $border-radius;
+                    margin-top: 10px;
+                    display: block;
+
+                    &-info {
+                        p {
+                            margin: 0;
+                            color: grey;
+                            font-size: 10px;
+                        }
+                    }
+
+                    &-current {
+                        margin: 0;
+                        color: green;
+                        font-size: 10px;
+                    }
+
+                    &.weak {
+                        width: 25%;
+                        background-color: rgb(226, 117, 117);
+                    }
+
+                    &.moderator {
+                        width: 50%;
+                        background-color: rgb(226, 177, 85);
+                    }
+
+                    &.strong {
+                        width: 75%;
+                        background-color: rgb(86, 86, 231);
+                    }
+
+                    &.very-strong {
+                        width: 100%;
+                        background-color: rgb(26, 236, 26);
+                    }
+
+                }
+            }
+        }
     }
 }

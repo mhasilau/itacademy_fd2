@@ -26,4 +26,28 @@ export const passwordStrengthController = password => {
             passwordStrength = item;
         }
     });
+
+    console.log(passwordStrengthNum);
+
+    const filler = document.querySelector('.sign_up__form__password-strength-status-filler');
+    switch (passwordStrengthNum) {
+        case 1:
+            filler.classList.add('weak');
+            filler.classList.remove('moderator');
+            break;
+        case 2:
+            filler.classList.add('moderator');
+            filler.classList.remove('strong');
+            break;
+        case 3:
+            filler.classList.add('strong');
+            filler.classList.remove('very-strong');
+            break;
+        case 4:
+            filler.classList.add('very-strong');
+            break;
+        default:
+            filler.classList.remove('weak');
+            break;
+    }
 }
