@@ -4,5 +4,6 @@ export const REGEXP = {
     UPPER_CASE: /(?=.*[A-Z])/,
     LOWER_CASE: /(?=.*[a-z])/,
     NUMBERS: /(?=.*\d)/,
-    EIGHT_CHARACTERS: /[a-z\d@$#!%&?^*()-+_]{8,}/i
+    EIGHT_CHARACTERS: /[a-z\d@$#!%&?^*()-+_]{8,}/i,
+    NAME: /^[a-zA-Z_]{3,}$/
 }

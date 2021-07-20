@@ -30,3 +30,36 @@ export const  showErrorNotification = error => {
     body.append(notification);
     setTimeout( () => notification.style.display = 'none', 5000);
 }
+
+export const showPasswordsCompareError = () => {
+    const errorTag = document.getElementById('passwordCompareError');
+    errorTag.style.display = 'block';
+    errorTag.innerText = ERROR_MESSAGE.password_compare;
+}
+
+export const hidePasswordsCompareError = () => {
+    const errorTag = document.getElementById('passwordCompareError');
+    errorTag.style.display = 'none';
+}
+
+export const showUsernameError = () => {
+    const errorTag = document.getElementById('usernameError');
+    errorTag.style.display = 'block';
+    errorTag.innerText = ERROR_MESSAGE.username;
+}
+
+export const hideUsernameError = () => {
+    const errorTag = document.getElementById('usernameError');
+    errorTag.style.display = 'none';
+}
+
+export const showBdayError = () => {
+    const errorTag = document.getElementById('birthError');
+    errorTag.style.display = 'block';
+    errorTag.innerText = ERROR_MESSAGE.birth;
+}
+
+export const hideBdayError = () => {
+    const errorTag = document.getElementById('birthError');
+    errorTag.style.display = 'none';
+}
