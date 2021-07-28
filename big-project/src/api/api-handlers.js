@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import { FIREBASE_CONFIG, databaseURL, authURL } from './api-config';
 import { showErrorNotification } from '../shared/error-handlers';
+import { setUid, getUid } from '../shared/ls-service';
+import { routes } from '../shared/constants/routes';
 
 
 export const initApi = () => {
@@ -53,36 +55,58 @@ export const signIn = (email, password) => {
         .catch( error => showErrorNotification(error));
 }
 
-export const signUp = async (email, password) => {
+export const signUp = async user => {
+    const { email, password } = user;
 
-    return firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(response => response);
+    // try {
+    //     await createAuthData(email, password);
+    //     await createUser(user);
+    //     await signIn(email, password);
+    // } catch (error) {
+        
+    // }
+
+
+    console.log('lol');
 }
 
+export const createAuthData = (email, password) => {
+    return firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(response => {
+        const { uid } = response.user;
+        setUid(uid);
+    });
+}
+
+
+export const passwordrecovery = email => {
+    firebase.auth().sendPasswordResetEmail(email)
+        .then( () => window.location.href = routes.sign_in )
+        .catch( error => showErrorNotification(error));
+}
+
+
+
+
+
+export const createUser = user => {
+    const { firstname, lastname, email, birth } = user;
+    return axios.post(`${databaseURL}/users.json`, {
+        firstname,
+        lastname,
+        email,
+        birth,
+        uuid: getUid()
+    });
+}
 
 initApi();
 
 
-// export const createUser = ({ username, age, createionDate }) => {
-//     fetch(
-//         `${databaseURL}/users.json`,
-//         {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 username,
-//                 age,
-//                 createionDate
-//             })
-//         }
-//     )
-//         .then( response => response.json())
-//         .then( result => console.log(result));
-// }
+
+
 
 // export const getUsers = () => {
 //     fetch(`${databaseURL}/users.json`,

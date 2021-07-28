@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 
-import { signIn } from '../../api/api-handlers';
+import { signIn, passwordrecovery } from '../../api/api-handlers';
 import { getToken, setToken, removeToken} from '../../shared/ls-service';
 import { routes, paths } from '../../shared/constants/routes';
 import { passwordLengthValidator, emailValidator } from '../../shared/validators';
@@ -8,10 +8,14 @@ import {
     showPasswordLengthErrorMessage,
     hidePasswordLengthErrorMessage,
     hideEmailErrorMessage,
-    showEmailErrorMessage
+    showEmailErrorMessage,
+    showRecoverEmailErrorMessage,
+    hideRecoverEmailErrorMessage
 } from '../../shared/error-handlers';
 
 export const signInhandler = () => {
+    const recoverBtn = document.getElementById('recoverBtn');
+    const recoverEmailInput = document.getElementById('recoverEmailInput');
     const signInForm = document.querySelector('.sign_in__form');
     const signInBtn = document.getElementById('signInBtn');
     const emailInput = document.getElementById('email');
@@ -19,6 +23,7 @@ export const signInhandler = () => {
     const inputError = document.querySelector('.input-error');
 
     signInBtn.setAttribute('disabled', true);
+    recoverBtn.setAttribute('disabled', true);
 
     const formFields = {
         email: {
@@ -28,6 +33,24 @@ export const signInhandler = () => {
             isValid: false
         }
     }
+
+    recoverBtn.onclick = () => {
+        passwordrecovery();
+    }
+
+    recoverEmailInput.oninput = () => {
+        if (emailValidator(recoverEmailInput.value)) {
+            hideRecoverEmailErrorMessage();
+            emailInput.classList.remove('invalid');
+            recoverBtn.removeAttribute('disabled');
+        } else {
+            recoverEmailInput.classList.add('invalid');
+        }
+    }
+
+    recoverEmailInput.onblur = () => !emailValidator(recoverEmailInput.value) ?
+    showRecoverEmailErrorMessage() :
+    hideRecoverEmailErrorMessage();
 
     signInForm.addEventListener('submit', event => {
         event.preventDefault();
@@ -70,7 +93,7 @@ export const signInhandler = () => {
         showPasswordLengthErrorMessage() :
         hidePasswordLengthErrorMessage();
 
-    emailInput.onblur = () => !passwordLengthValidator(emailInput.value) ?
+    emailInput.onblur = () => !emailValidator(emailInput.value) ?
         showEmailErrorMessage() :
         hideEmailErrorMessage();
 

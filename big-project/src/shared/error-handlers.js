@@ -63,3 +63,14 @@ export const hideBdayError = () => {
     const errorTag = document.getElementById('birthError');
     errorTag.style.display = 'none';
 }
+
+export const showRecoverEmailErrorMessage = () => {
+    const errorTag = document.getElementById('recoverEmailInput');
+    errorTag.style.display = 'block';
+    errorTag.innerText = ERROR_MESSAGE.email;
+}
+
+export const hideRecoverEmailErrorMessage = () => {
+    const inputErrorTag = document.getElementById('recoverEmailInput');
+    inputErrorTag.style.display = 'none';
+}

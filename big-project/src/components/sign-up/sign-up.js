@@ -11,6 +11,7 @@ export const signUpHandler = () => {
     const signUpBtn = document.getElementById('signUpBtn');
     const emailInput = document.getElementById('email');
     const userNameInput = document.getElementById('name');
+    const userSurnameInput = document.getElementById('surname');
     const birthInput = document.getElementById('birth');
 
     signUpBtn.setAttribute('disabled', true);
@@ -20,7 +21,7 @@ export const signUpHandler = () => {
             isValid: false
         },
         birth: {
-            isValid: false
+            isValid: true
         },
         email: {
             isValid: false
@@ -95,22 +96,20 @@ export const signUpHandler = () => {
         isFormValid ? signUpBtn.removeAttribute('disabled') : signUpBtn.setAttribute('disabled', true);
     }
 
-    // signUpForm.addEventListener('submit', event => {
-    //     event.preventDefault();
-    //     const name = document.getElementById('name').value;
-    //     const surname = document.getElementById('surname').value;
-    //     const birth = document.getElementById('birth').value;
-    //     const email = document.getElementById('email').value;
-    //     const password = document.getElementById('password').value;
+    signUpForm.addEventListener('submit', event => {
+        event.preventDefault();
+        signUp(email, password);
 
-    //     signUp(email, password)
-    //         .then(response => {
-    //             if (response) {
-    //                 const { email } = response.user;
-    //                 setUserEmail(email);
-    //             }
-    //         });
-    // })
+        const user = {
+            firstname: userNameInput.value,
+            lastname: userSurnameInput.value,
+            email: emailInput.value,
+            birth: birthInput.value,
+            password: password1.value
+
+        }
+
+    })
 
 }
 
