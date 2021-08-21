@@ -1,0 +1,30 @@
+.header {
+    height: 100px;
+    background-color: rosybrown;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+    
+    h1 {
+        color: white;
+    }
+
+    &_right {
+        display: flex;
+
+        &_photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid white;
+            margin: 10px;
+
+            img {
+                width: 100%;
+                overflow: hidden;
+            }
+        }
+    }
+}
